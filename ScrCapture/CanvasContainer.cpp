@@ -453,27 +453,29 @@ BOOL CCanvasContainerUI::SaveCapBmpToFile(const std::wstring& strSaveFile)
 	
 	BOOL bRet = FALSE;
 	//将目标区域贴图到内存BITMAP  
-	HDC memDC = CreateCompatibleDC(m_pManager->GetPaintDC());
-	HBITMAP hBmp = CreateCompatibleBitmap(m_pManager->GetPaintDC(), nSaveWidth, nSaveHeight);
-	SelectObject(memDC, hBmp);
-	BitBlt(memDC, 0, 0, nSaveWidth, nSaveHeight,
-		m_pManager->GetPaintDC(), m_rcItem.left, m_rcItem.top, SRCCOPY);
+	HDC hDCDesk = CreateCompatibleDC(m_pManager->GetPaintDC());
+	HDC hDCSave = CreateCompatibleDC(m_pManager->GetPaintDC());
+	HBITMAP hSaveBmp = CreateCompatibleBitmap(m_pManager->GetPaintDC(), nSaveWidth, nSaveHeight);
+	const TImageInfo* stImage = m_pManager->GetImage(L"desktopimage");
+	SelectObject(hDCDesk, stImage->hBitmap);
+	SelectObject(hDCSave, hSaveBmp);
 
+	PaintStatusImage(hDCDesk);
+	::BitBlt(hDCSave, 0, 0, nSaveWidth, nSaveHeight, hDCDesk, m_rcItem.left, m_rcItem.top, SRCCOPY);
+	SelectObject(hDCSave, (HBITMAP)NULL);
 	//保存成文件  
 	{
 		//L"image/bmp" L"image/jpeg"  L"image/gif" L"image/tiff" L"image/png"  
-		Gdiplus::Bitmap *pbmSrc = Gdiplus::Bitmap::FromHBITMAP(hBmp, NULL);
+		Gdiplus::Bitmap *pbmSrc = Gdiplus::Bitmap::FromHBITMAP(hSaveBmp, NULL);
 		if (pbmSrc->Save(strSaveFile.c_str(), &imgClsid) == Ok){
 			bRet = TRUE;
 		}
 		delete pbmSrc;
 		pbmSrc = NULL;
 	}
-
-	//清理工作  
-	SelectObject(memDC, (HBITMAP)NULL);
-	DeleteDC(memDC);
-	DeleteObject(hBmp);
+	DeleteDC(hDCDesk);
+	DeleteDC(hDCSave);
+	DeleteObject(hSaveBmp);
 	return bRet;
 }
 
@@ -482,22 +484,28 @@ void CCanvasContainerUI::SaveCapBmpToClipboard()
 {
 	int nSaveWidth = m_rcItem.right - m_rcItem.left;
 	int nSaveHeight = m_rcItem.bottom - m_rcItem.top;
+
 	//将目标区域贴图到内存BITMAP  
-	HDC memDC = CreateCompatibleDC(m_pManager->GetPaintDC());
-	HBITMAP hBmp = CreateCompatibleBitmap(m_pManager->GetPaintDC(), nSaveWidth, nSaveHeight);
-	SelectObject(memDC, hBmp);
-	BitBlt(memDC, 0, 0, nSaveWidth, nSaveHeight,
-		m_pManager->GetPaintDC(), m_rcItem.left, m_rcItem.top, SRCCOPY);
-	//清理工作  
-	SelectObject(memDC, (HBITMAP)NULL);
-	DeleteDC(memDC);
+	HDC hDCDesk = CreateCompatibleDC(m_pManager->GetPaintDC());
+	HDC hDCSave = CreateCompatibleDC(m_pManager->GetPaintDC());
+	HBITMAP hSaveBmp = CreateCompatibleBitmap(m_pManager->GetPaintDC(), nSaveWidth, nSaveHeight);
+
+	const TImageInfo* stImage = m_pManager->GetImage(L"desktopimage");
+	SelectObject(hDCDesk, stImage->hBitmap);
+	SelectObject(hDCSave, hSaveBmp);
+	PaintStatusImage(hDCDesk);
+	::BitBlt(hDCSave, 0, 0, nSaveWidth, nSaveHeight, hDCDesk, m_rcItem.left, m_rcItem.top, SRCCOPY);
+	SelectObject(hDCSave, (HBITMAP)NULL);
+
 	if (OpenClipboard(NULL))
 	{
 		EmptyClipboard();
-		SetClipboardData(CF_BITMAP, hBmp);
+		SetClipboardData(CF_BITMAP, hSaveBmp);
 		CloseClipboard();
 	}
-	DeleteObject(hBmp);
+	DeleteDC(hDCDesk);
+	DeleteDC(hDCSave);
+	DeleteObject(hSaveBmp);
 }
 
 void CCanvasContainerUI::Undo()
