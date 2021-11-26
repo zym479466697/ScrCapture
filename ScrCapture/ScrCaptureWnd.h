@@ -20,6 +20,39 @@ public:
 	UINT GetClassStyle() const;
 	void OnFinalMessage(HWND /*hWnd*/);
 
+	CDuiString GetSkinFolder()
+	{
+		return _T("ScrCaptureSkin\\");
+	}
+
+	virtual LPCTSTR GetResourceID() const
+	{
+#ifdef _DEBUG
+		return NULL;
+#else
+		return MAKEINTRESOURCE(IDR_ZIPRES_SRCCAPTURE);
+#endif
+
+	}
+
+	UILIB_RESOURCETYPE GetResourceType() const
+	{
+#ifdef _DEBUG
+		return UILIB_FILE;
+#else
+		return UILIB_ZIPRESOURCE;
+#endif
+	}
+
+	CDuiString GetZIPFileName() const
+	{
+#ifdef _DEBUG
+		return _T("");
+#else
+		return _T("ScrCaptureSkin.zip");
+#endif
+	}
+
 	void Init();
 	void OnPrepare();
 	void Notify(TNotifyUI& msg);
@@ -41,6 +74,8 @@ public:
 
 private:
 	static CScrCaptureWnd* m_pInstance;
+	static LPBYTE m_lpResourceZIPBuffer;
+
 	ULONG_PTR m_pGdiplusToken;
 	CPaintManagerUI m_pm;
 	HMENU m_hEditMenu;

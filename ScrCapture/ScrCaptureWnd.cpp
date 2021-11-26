@@ -46,6 +46,7 @@ public:
 	}
 };
 
+LPBYTE CScrCaptureWnd::m_lpResourceZIPBuffer = NULL;
 CScrCaptureWnd::CScrCaptureWnd() : m_hEditMenu(NULL), m_bClipChoiced(false)
 {
 	//gdi+
@@ -375,7 +376,52 @@ LRESULT CScrCaptureWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	if (uMsg == WM_CREATE) {
 		m_pm.Init(m_hWnd);
 		m_pm.AddPreMessageFilter(this);
+
 		CDialogBuilder builder;
+
+		CDuiString strResourcePath = m_pm.GetResourcePath();
+		if (strResourcePath.IsEmpty())
+		{
+			strResourcePath = m_pm.GetInstancePath();
+			strResourcePath += GetSkinFolder().GetData();
+		}
+		m_pm.SetResourcePath(strResourcePath.GetData());
+
+		switch (GetResourceType())
+		{
+		case UILIB_ZIP:
+			m_pm.SetResourceZip(GetZIPFileName().GetData(), true);
+			break;
+		case UILIB_ZIPRESOURCE:
+		{
+			HRSRC hResource = ::FindResource(m_pm.GetResourceDll(), GetResourceID(), _T("ZIPRES"));
+			if (hResource == NULL)
+				return 0L;
+			DWORD dwSize = 0;
+			HGLOBAL hGlobal = ::LoadResource(m_pm.GetResourceDll(), hResource);
+			if (hGlobal == NULL)
+			{
+#if defined(WIN32) && !defined(UNDER_CE)
+				::FreeResource(hResource);
+#endif
+				return 0L;
+			}
+			dwSize = ::SizeofResource(m_pm.GetResourceDll(), hResource);
+			if (dwSize == 0)
+				return 0L;
+			m_lpResourceZIPBuffer = new BYTE[dwSize];
+			if (m_lpResourceZIPBuffer != NULL)
+			{
+				::CopyMemory(m_lpResourceZIPBuffer, (LPBYTE)::LockResource(hGlobal), dwSize);
+			}
+#if defined(WIN32) && !defined(UNDER_CE)
+			::FreeResource(hResource);
+#endif
+			m_pm.SetResourceZip(m_lpResourceZIPBuffer, dwSize);
+		}
+		break;
+		}
+
 		CDialogBuilderCallbackEx cb;
 		CControlUI* pRoot = builder.Create(_T("ScrCapture.xml"), (UINT)0, &cb, &m_pm);
 		ASSERT(pRoot && "Failed to parse XML");

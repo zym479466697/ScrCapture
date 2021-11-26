@@ -189,7 +189,6 @@
     <ClInclude Include="..\common\CommFunc.h" />
     <ClInclude Include="..\common\Lock.h" />
     <ClInclude Include="..\common\Log.h" />
-    <ClInclude Include="..\common\network_util.h" />
     <ClInclude Include="..\common\ThreadHelper.h" />
     <ClInclude Include="BitmapEx.h" />
     <ClInclude Include="CanvasContainer.h" />

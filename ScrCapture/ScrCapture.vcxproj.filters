@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="dlg">
+      <UniqueIdentifier>{2dc932bb-c96a-40f1-a400-7aa9590d5be5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third-part">
+      <UniqueIdentifier>{5908e442-c42e-46a9-98b7-7a3c9fef0fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third-part\log">
+      <UniqueIdentifier>{27f8e097-2e86-4ac2-a88b-7ff80b023487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="component">
+      <UniqueIdentifier>{d79b64fc-6888-482a-86a9-f149d3e7ebe0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\CommFunc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Log.cpp">
+      <Filter>third-part\log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\ThreadHelper.cpp">
+      <Filter>third-part\log</Filter>
+    </ClCompile>
+    <ClCompile Include="CanvasContainer.cpp">
+      <Filter>dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrCaptureWnd.cpp">
+      <Filter>dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnifierUI.cpp">
+      <Filter>dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawGraph.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="BitmapEx.cpp">
+      <Filter>component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Lock.cpp">
+      <Filter>third-part\log</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Define.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\CommFunc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Log.h">
+      <Filter>third-part\log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\ThreadHelper.h">
+      <Filter>third-part\log</Filter>
+    </ClInclude>
+    <ClInclude Include="WinBaseEx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasContainer.h">
+      <Filter>dlg</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrCaptureWnd.h">
+      <Filter>dlg</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnifierUI.h">
+      <Filter>dlg</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawGraph.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="RectEx.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapEx.h">
+      <Filter>component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Lock.h">
+      <Filter>third-part\log</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ScrCapture.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ScrCaptureSkin\ScrCapture_icon.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ScrCaptureSkin\ScrCaptureSkin.zip" />
+  </ItemGroup>
+</Project>
