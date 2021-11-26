@@ -184,6 +184,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ScrCaptureWnd.cpp" />
     <ClCompile Include="Util.cpp" />
+    <ClCompile Include="WordEditUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\CommFunc.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="ScrCaptureWnd.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="WinBaseEx.h" />
+    <ClInclude Include="WordEditUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ScrCapture.rc" />

@@ -17,6 +17,7 @@
 		<Label name="txt_canvas_size" float="true" pos="0,0"  width="80" height="20" textcolor="#FFFFFFFF" textpadding="5,0,0,0" align="left" valign="center" />
 		<CanvasContainer name="desktopcanvascontainer" float="true" inset="2,2,2,2" bordersize="1" bordercolor="#FF00ff00" >
 			<Control name="desktopcanvas" mouse="false"/>
+			<RichEdit name="edit_word" font="12" float="true" pos="0,0" width="60" height="30" wanttab="false" bordercolor="#FFff0000" bordersize="2" bkcolor="#00FFFFFF" textcolor="#FFFF0000" textpadding="5,5,5,5" multiline="true" password="false" align="left" vscrollbar="false" />
 		</CanvasContainer>
 		<HorizontalLayout name="main_bar" float="true" pos="0,0" width="360" height="30" bordersize="1" bordercolor="ff000000" bkcolor="#ffffffff">
 			<Option name="op_rectangle" tooltip="矩形" group="group_toolbar" float="true" pos="3,3" width="24" height="24" normalimage="file='rectangle.png'  corner='2,2,2,2'" selectedimage="file='rectangle_hot.png'  corner='2,2,2,2'" />

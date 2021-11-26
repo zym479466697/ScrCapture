@@ -8,6 +8,7 @@ class IGraph
 public:
 	IGraph(){
 		m_penWidth = 1;
+		m_bEditor = false;
 	}
 	virtual ~IGraph(){
 	}
@@ -24,11 +25,25 @@ public:
 	virtual RectX GetRectX() {
 		return m_itemRc;
 	}
+	virtual void SetWord(const std::wstring& strWord) {
+		m_strWord = strWord;
+	}
+	virtual std::wstring GetWord() const {
+		return m_strWord;
+	}
+	virtual void SetEditor(bool bEditor) {
+		m_bEditor = bEditor;
+	}
+	virtual bool IsEditor() const {
+		return m_bEditor;
+	}
 protected:
 	RectX m_itemRc;
 	RectX m_canvasRc;//ª≠≤º¥Û–°
 	int m_penWidth;
 	Gdiplus::Color m_penColor;
+	bool m_bEditor;
+	std::wstring m_strWord;
 };
 
 //==========GraphRectangle============
@@ -144,6 +159,26 @@ public:
 	virtual void DrawGraph(HDC hDC);
 private:
 	std::vector<POINT> m_pointList;
+};
+
+
+//==========GraphWord============
+class GraphWord : public IGraph
+{
+public:
+	GraphWord() {
+	}
+	~GraphWord() {
+	}
+public:
+	virtual void ResetGraphPos(POINT ptStart, POINT ptEnd);
+	virtual bool PtInRect(const POINT& pt);
+	virtual void DrawGraph(HDC hDC);
+	void SetFont(HFONT font) {
+		m_font = font;
+	}
+private:
+	HFONT m_font;
 };
 
 

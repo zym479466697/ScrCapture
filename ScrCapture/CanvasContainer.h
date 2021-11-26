@@ -34,6 +34,7 @@ public:
 
 	BOOL SaveCapBmpToFile(const std::wstring& strSaveFile);
 	void SaveCapBmpToClipboard();
+	void OnEditWordKillFocus(const std::wstring& strWord);
 private:
 	BOOL GetImageCLSID(const WCHAR* format, CLSID* pCLSID);
 protected:

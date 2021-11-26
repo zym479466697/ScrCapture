@@ -420,6 +420,49 @@ bool GraphMosaic::PtInRect(const POINT& pt)
 	return false;
 }
 
+
+//==========GraphWord============
+void GraphWord::ResetGraphPos(POINT ptStart, POINT ptEnd)
+{
+	RectX rcGraph(ptStart, ptEnd);
+	//rcGraph.ResetStartEnd();
+	if (rcGraph.OutOfBoundary(m_canvasRc)) {
+		rcGraph.ResetBoundary(m_canvasRc);
+	}
+	m_itemRc = rcGraph;
+}
+
+void GraphWord::DrawGraph(HDC hDC)
+{
+	if (IsEditor()) {
+		return;
+	}
+
+	m_penColor = 2;
+	Graphics graphics(hDC);
+	Pen pen(m_penColor);
+	pen.SetWidth(m_penWidth);
+	graphics.DrawRectangle(&pen, m_itemRc.leftX, m_itemRc.topX, m_itemRc.rightX - m_itemRc.leftX, m_itemRc.bottomX - m_itemRc.topX);
+
+
+	::SetBkMode(hDC, TRANSPARENT);
+	//::SetTextColor(hDC, RGB(m_penColor.GetB(), m_penColor.GetG(), m_penColor.GetR()));
+	::SetTextColor(hDC, RGB(255,0,0));
+	HFONT hOldFont = (HFONT)::SelectObject(hDC, m_font);
+	RECT rc = m_itemRc.ToRECT();
+	::DrawText(hDC, m_strWord.c_str(), -1, &rc, DT_LEFT | DT_NOPREFIX);
+	::SelectObject(hDC, hOldFont);
+}
+
+bool GraphWord::PtInRect(const POINT& pt)
+{
+	const RECT rc = m_itemRc.ToRECT();
+	if (::PtInRect(&rc, pt)) {
+		return true;
+	}
+	return false;
+}
+
 //==========GraphFactory============
 IGraph* GraphFactory::CreateGraph(ACTION_OP op)
 {
@@ -448,6 +491,9 @@ IGraph* GraphFactory::CreateGraph(ACTION_OP op)
 		break;
 	case ACTION_OP_MOSAIC:
 		pGraph = new GraphMosaic();
+		break;
+	case ACTION_OP_TXT:
+		pGraph = new GraphWord();
 		break;
 	}
 	return pGraph;

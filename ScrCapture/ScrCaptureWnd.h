@@ -68,7 +68,8 @@ public:
 	void ShowSubBar();
 	void OnSelectColor(int idx);
 	void OnMainBarSelectActionOp(ACTION_OP op);
-
+	void ResetInputWordEditPos(const RECT& rc, const std::wstring& strWord = L"");
+	
 	LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -99,6 +100,7 @@ private:
 	COptionUI* m_pOptionBigPen;
 	CComboUI* m_pComboxFont;
 	CSliderUI* m_pSliderMosaic;
+	CRichEditUI* m_pInputWordEdit;
 	
 	RECT m_rcWindow;
 	RECT m_rcClipPadding;

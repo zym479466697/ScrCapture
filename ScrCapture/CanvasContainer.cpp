@@ -196,8 +196,21 @@ void CCanvasContainerUI::DoEvent(TEventUI& event)
 				POINT ptEnd = { m_ptLastMouse.x + 1, m_ptLastMouse.y + 1 };
 				m_pGraph->ResetGraphPos(m_ptLastMouse, ptEnd);
 			}break;
-			case ACTION_OP_TXT:
-				break;
+			case ACTION_OP_TXT: {
+				m_pGraph = GraphFactory::CreateGraph(m_actionOp);
+				m_pGraph->SetEditor(true);
+				m_pGraph->SetPen(m_penWidth, m_penColor, RectX(m_rcItem).DeflateRect(-3, -3));
+				POINT ptEnd = { m_ptLastMouse.x + 60, m_ptLastMouse.y + 30 };
+				m_pGraph->ResetGraphPos(m_ptLastMouse, ptEnd);
+				//ÉèÖÃ×ÖÌå
+				((GraphWord*)m_pGraph)->SetFont(m_pManager->GetFont(12));
+				RECT rc;
+				rc.left = m_ptLastMouse.x - m_rcItem.left;
+				rc.top = m_ptLastMouse.y - m_rcItem.top;
+				rc.right = rc.left + 60;
+				rc.bottom = rc.top + 30;
+				CScrCaptureWnd::Instance()->ResetInputWordEditPos(rc);
+				}break;
 			default:
 				break;
 			}
@@ -515,4 +528,22 @@ void CCanvasContainerUI::Undo()
 	}
 	m_graphItemList.erase(m_graphItemList.begin() + (m_graphItemList.size() - 1));
 	Invalidate();
+}
+
+
+void CCanvasContainerUI::OnEditWordKillFocus(const std::wstring& strWord)
+{
+	if (m_actionOp == ACTION_OP_TXT && m_pGraph) {
+		if (strWord.empty()) {
+			delete m_pGraph;
+			m_pGraph = nullptr;
+		}
+		else {
+			m_pGraph->SetWord(strWord);
+			m_pGraph->SetEditor(false);
+			m_graphItemList.push_back(m_pGraph);
+			Invalidate();
+			m_pGraph = nullptr;
+		}
+	}
 }

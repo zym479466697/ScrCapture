@@ -134,7 +134,9 @@ void CScrCaptureWnd::Init()
 	m_pOptionBigPen = static_cast<COptionUI*>(m_pm.FindControl(_T("op_big_pen")));
 	m_pComboxFont = static_cast<CComboUI*>(m_pm.FindControl(_T("font_comb")));
 	m_pSliderMosaic = static_cast<CSliderUI*>(m_pm.FindControl(_T("mosaic_slider")));
+	m_pInputWordEdit = static_cast<CRichEditUI*>(m_pm.FindControl(_T("edit_word")));
 
+	m_pInputWordEdit->SetVisible(FALSE);
 	ShowMainBar(false);
 }
 
@@ -238,7 +240,13 @@ void CScrCaptureWnd::Notify(TNotifyUI& msg)
 			::PostQuitMessage(0L);
 		}
 	}
-
+	else if (msg.sType == DUI_MSGTYPE_KILLFOCUS) {
+		if (strName == L"edit_word") {
+			std::wstring strWord = m_pInputWordEdit->GetText().GetData();
+			m_pInputWordEdit->SetVisible(false);
+			m_pDesktopCanvasContainer->OnEditWordKillFocus(strWord);
+		}
+	}
 }
 
 void CScrCaptureWnd::OnMainBarSelectActionOp(ACTION_OP op)
@@ -681,4 +689,14 @@ void CScrCaptureWnd::ShowSubBar()
 	if (!m_pSubBar->IsVisible()) {
 		m_pSubBar->SetVisible(true);
 	}
+}
+
+void CScrCaptureWnd::ResetInputWordEditPos(const RECT& rc, const std::wstring& strWord)
+{
+	m_pInputWordEdit->SetPos(rc);
+	if (!m_pInputWordEdit->IsVisible()) {
+		m_pInputWordEdit->SetVisible(true);
+	}
+	m_pInputWordEdit->SetText(strWord.c_str());
+	m_pInputWordEdit->SetFocus();
 }
