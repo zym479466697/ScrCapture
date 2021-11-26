@@ -693,7 +693,10 @@ void CScrCaptureWnd::ShowSubBar()
 
 void CScrCaptureWnd::ResetInputWordEditPos(const RECT& rc, const std::wstring& strWord)
 {
-	m_pInputWordEdit->SetPos(rc);
+	SIZE pos = { rc.left, rc.top };
+	m_pInputWordEdit->SetFixedXY(pos);
+	m_pInputWordEdit->SetFixedWidth(rc.right - rc.left);
+	m_pInputWordEdit->SetFixedHeight(rc.bottom - rc.top);
 	if (!m_pInputWordEdit->IsVisible()) {
 		m_pInputWordEdit->SetVisible(true);
 	}

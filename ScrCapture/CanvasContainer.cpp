@@ -200,7 +200,7 @@ void CCanvasContainerUI::DoEvent(TEventUI& event)
 				m_pGraph = GraphFactory::CreateGraph(m_actionOp);
 				m_pGraph->SetEditor(true);
 				m_pGraph->SetPen(m_penWidth, m_penColor, RectX(m_rcItem).DeflateRect(-3, -3));
-				POINT ptEnd = { m_ptLastMouse.x + 60, m_ptLastMouse.y + 30 };
+				POINT ptEnd = { m_ptLastMouse.x + 60, m_ptLastMouse.y + 60 };
 				m_pGraph->ResetGraphPos(m_ptLastMouse, ptEnd);
 				//ÉèÖÃ×ÖÌå
 				((GraphWord*)m_pGraph)->SetFont(m_pManager->GetFont(12));
@@ -208,7 +208,7 @@ void CCanvasContainerUI::DoEvent(TEventUI& event)
 				rc.left = m_ptLastMouse.x - m_rcItem.left;
 				rc.top = m_ptLastMouse.y - m_rcItem.top;
 				rc.right = rc.left + 60;
-				rc.bottom = rc.top + 30;
+				rc.bottom = rc.top + 60;
 				CScrCaptureWnd::Instance()->ResetInputWordEditPos(rc);
 				}break;
 			default:

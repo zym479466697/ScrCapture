@@ -438,19 +438,18 @@ void GraphWord::DrawGraph(HDC hDC)
 		return;
 	}
 
-	m_penColor = 2;
-	Graphics graphics(hDC);
-	Pen pen(m_penColor);
-	pen.SetWidth(m_penWidth);
-	graphics.DrawRectangle(&pen, m_itemRc.leftX, m_itemRc.topX, m_itemRc.rightX - m_itemRc.leftX, m_itemRc.bottomX - m_itemRc.topX);
-
+	//m_penWidth = 2;
+	//Graphics graphics(hDC);
+	//Pen pen(m_penColor);
+	//pen.SetWidth(m_penWidth);
+	//graphics.DrawRectangle(&pen, m_itemRc.leftX, m_itemRc.topX, m_itemRc.rightX - m_itemRc.leftX, m_itemRc.bottomX - m_itemRc.topX);
 
 	::SetBkMode(hDC, TRANSPARENT);
-	//::SetTextColor(hDC, RGB(m_penColor.GetB(), m_penColor.GetG(), m_penColor.GetR()));
-	::SetTextColor(hDC, RGB(255,0,0));
+	::SetTextColor(hDC, RGB(m_penColor.GetR(), m_penColor.GetG(), m_penColor.GetB()));
+	//::SetTextColor(hDC, RGB(255,0,0));
 	HFONT hOldFont = (HFONT)::SelectObject(hDC, m_font);
-	RECT rc = m_itemRc.ToRECT();
-	::DrawText(hDC, m_strWord.c_str(), -1, &rc, DT_LEFT | DT_NOPREFIX);
+	RECT rc = m_itemRc.DeflateRect(5, 5).ToRECT();
+	::DrawText(hDC, m_strWord.c_str(), -1, &rc, DT_LEFT | DT_VCENTER | DT_NOPREFIX);
 	::SelectObject(hDC, hOldFont);
 }
 

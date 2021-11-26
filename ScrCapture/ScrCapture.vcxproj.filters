@@ -60,9 +60,6 @@
     <ClCompile Include="..\common\Lock.cpp">
       <Filter>third-part\log</Filter>
     </ClCompile>
-    <ClCompile Include="WordEditUI.cpp">
-      <Filter>dlg</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Define.h">
@@ -106,9 +103,6 @@
     </ClInclude>
     <ClInclude Include="..\common\Lock.h">
       <Filter>third-part\log</Filter>
-    </ClInclude>
-    <ClInclude Include="WordEditUI.h">
-      <Filter>dlg</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
