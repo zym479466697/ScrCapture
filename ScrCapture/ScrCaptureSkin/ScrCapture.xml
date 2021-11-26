@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window>
+	<Font id="0" name="Microsoft YaHei" size="12" bold="false" default="true" />
+	<Font id="8" name="Microsoft YaHei" size="8" bold="false"/>
+	<Font id="10" name="Microsoft YaHei" size="10" bold="false"/>
+	<Font id="12" name="Microsoft YaHei" size="12" bold="false"/>
+	<Font id="14" name="Microsoft YaHei" size="14" bold="false"/>
+	<Font id="16" name="Microsoft YaHei" size="16" bold="false"/>
+	<Font id="18" name="Microsoft YaHei" size="18" bold="false"/>
+	<Font id="20" name="Microsoft YaHei" size="20" bold="false"/>
+	<Font id="22" name="Microsoft YaHei" size="22" bold="false"/>
+	<Container bordercolor="#FF00ffff">
+		<Control name="desktopimage"/>
+		<Control name="desktopmask"/>
+		<Magnifier name="magnifier" float="true" />
+		<Control name="desktopmaskborder" float="true" pos="0,0,0,0" bordersize="4" bordercolor="#FF00A2E8"/>
+		<Label name="txt_canvas_size" float="true" pos="0,0"  width="80" height="20" textcolor="#FFFFFFFF" textpadding="5,0,0,0" align="left" valign="center" />
+		<CanvasContainer name="desktopcanvascontainer" float="true" inset="2,2,2,2" bordersize="1" bordercolor="#FF00ff00" >
+			<Control name="desktopcanvas" mouse="false"/>
+		</CanvasContainer>
+		<HorizontalLayout name="main_bar" float="true" pos="0,0" width="360" height="30" bordersize="1" bordercolor="ff000000" bkcolor="#ffffffff">
+			<Option name="op_rectangle" tooltip="矩形" group="group_toolbar" float="true" pos="3,3" width="24" height="24" normalimage="file='rectangle.png'  corner='2,2,2,2'" selectedimage="file='rectangle_hot.png'  corner='2,2,2,2'" />
+			<Option name="op_ellipse" tooltip="椭圆" group="group_toolbar" float="true" pos="33,3" width="24" height="24" normalimage="file='ellipse.png'  corner='2,2,2,2'" selectedimage="file='ellipse_hot.png'  corner='2,2,2,2'" />
+			<Option name="op_line" tooltip="直线" group="group_toolbar" float="true" pos="63,3" width="24" height="24" normalimage="file='line.png'  corner='2,2,2,2'" selectedimage="file='line_hot.png'  corner='2,2,2,2'" />
+			<Option name="op_arrow" tooltip="箭头" group="group_toolbar" float="true" pos="93,3" width="24" height="24" normalimage="file='arrow.png'  corner='2,2,2,2'" selectedimage="file='arrow_hot.png'  corner='2,2,2,2'" />
+			<Option name="op_scrawl" tooltip="涂鸦" group="group_toolbar" float="true" pos="123,3" width="24" height="24" normalimage="file='scrawl.png'  corner='2,2,2,2'" selectedimage="file='scrawl_hot.png'  corner='2,2,2,2'" />
+			<Option name="op_highlight" tooltip="荧光笔" group="group_toolbar" float="true" pos="153,3" width="24" height="24" normalimage="file='highlight.png'  corner='2,2,2,2'" selectedimage="file='highlight_hot.png'  corner='2,2,2,2'" />
+			<Option name="op_mosaic" tooltip="马赛克" group="group_toolbar" float="true" pos="183,3" width="24" height="24" normalimage="file='mosaic.png'  corner='2,2,2,2'" selectedimage="file='mosaic_hot.png'  corner='2,2,2,2'" />
+			<Option name="op_text" tooltip="文字" group="group_toolbar" float="true" pos="213,3" width="24" height="24" normalimage="file='text.png'  corner='2,2,2,2'" selectedimage="file='text_hot.png'  corner='2,2,2,2'" />
+			<Button name="btn_undo" tooltip="撤销编辑" float="true" pos="243,3" width="24" height="24" normalimage="file='undo.png' corner='2,2,2,2'" hotimage="file='undo_hot.png' corner='2,2,2,2'" />
+			<Button name="btn_save" tooltip="保存截图" float="true" pos="273,3" width="24" height="24" normalimage="file='save.png' corner='2,2,2,2'" hotimage="file='save_hot.png' corner='2,2,2,2'" />
+			<Button name="btn_cancel" tooltip="取消截图" float="true" pos="303,3" width="24" height="24" normalimage="file='cancel.png' corner='2,2,2,2'" hotimage="file='cancel_hot.png' corner='2,2,2,2'" />
+			<Button name="btn_finish" tooltip="完成截图" float="true" pos="333,3" width="24" height="24" normalimage="file='finish.png' corner='2,2,2,2'" hotimage="file='finish_hot.png' corner='2,2,2,2'" />
+		</HorizontalLayout >
+		<HorizontalLayout name="sub_bar" float="true" pos="0,32" width="390" height="40" bkcolor="#ffEAEEF5" bordersize="1" bordercolor="ff000000">
+			<HorizontalLayout name="pen_layout" width="100" height="40">
+				<Option name="op_small_pen" float="true" pos="8,8" width="24" height="24" tooltip="" group="group_pen" normalimage="file='small_pen.png'" selectedimage="file='small_pen_hot.png'" />
+				<Option name="op_mid_pen" float="true" pos="37,8" width="24" height="24" tooltip="" group="group_pen"  normalimage="file='mid_pen.png'" selectedimage="file='mid_pen_hot.png'" />
+				<Option name="op_big_pen" float="true" pos="66,8" width="24" height="24"  tooltip="" group="group_pen" normalimage="file='bold_pen.png'" selectedimage="file='bold_pen_hot.png'" />
+			</HorizontalLayout>
+			<HorizontalLayout name="font_layout" width="90" height="40">
+				<Label float="true" pos="8,8" width="24" height="24" bkimage="t.png" />
+				<Combo name="font_comb" float="true" pos="40,8" width="40" height="24" itemheight="18" tooltip="" normalimage="file='Combo_nor.png' corner='2,2,24,2'" hotimage="file='Combo_over.png' corner='2,2,24,2'" pushedimage="file='Combo_over.png' corner='2,2,24,2'" textpadding="1,1,1,1" >
+					<ListLabelElement text="8"/>
+					<ListLabelElement text="10"/>
+					<ListLabelElement text="12" selected="true" />
+					<ListLabelElement text="14"/>
+					<ListLabelElement text="16"/>
+					<ListLabelElement text="18"/>
+					<ListLabelElement text="20"/>
+					<ListLabelElement text="22"/>
+				</Combo>
+			</HorizontalLayout>
+			<HorizontalLayout name="color_split_layout" width="5" height="40">
+				<Control float="true" bkcolor="#ff000000" pos="2,8" width="1" height="24"/>
+			</HorizontalLayout>
+			<HorizontalLayout name="color_select_layout" width="170" height="40">
+				<Label name="color_select" float="true" pos="5,5" width="30" height="30" bkimage="file='color1_hot.png' corner='2,2,2,2'"/>
+				<Option name="color_1" float="true" pos="40,5" width="14" height="14" tooltip="" group="group_color" normalimage="file='color1.png' corner='2,2,2,2'" />
+				<Option name="color_2" float="true" pos="56,5" width="14" height="14" tooltip="" group="group_color" normalimage="file='color2.png' corner='2,2,2,2'" />
+				<Option name="color_3" float="true" pos="72,5" width="14" height="14" tooltip="" group="group_color" normalimage="file='color3.png' corner='2,2,2,2'" />
+				<Option name="color_4" float="true" pos="88,5" width="14" height="14" tooltip="" group="group_color" normalimage="file='color4.png' corner='2,2,2,2'" />
+				<Option name="color_5" float="true" pos="104,5" width="14" height="14" tooltip="" group="group_color" normalimage="file='color5.png' corner='2,2,2,2'" />
+				<Option name="color_6" float="true" pos="120,5" width="14" height="14" tooltip="" group="group_color" normalimage="file='color6.png' corner='2,2,2,2'" />
+				<Option name="color_7" float="true" pos="136,5" width="14" height="14" tooltip="" group="group_color" normalimage="file='color7.png' corner='2,2,2,2'" />
+				<Option name="color_8" float="true" pos="152,5" width="14" height="14" tooltip="" group="group_color" normalimage="file='color8.png' corner='2,2,2,2'" />
+				<Option name="color_9" float="true" pos="40,21" width="14" height="14" tooltip="" group="group_color" normalimage="file='color9.png' corner='2,2,2,2'" />
+				<Option name="color_10" float="true" pos="56,21" width="14" height="14" tooltip="" group="group_color" normalimage="file='color10.png' corner='2,2,2,2'" />
+				<Option name="color_11" float="true" pos="72,21" width="14" height="14" tooltip="" group="group_color" normalimage="file='color11.png' corner='2,2,2,2'" />
+				<Option name="color_12" float="true" pos="88,21" width="14" height="14" tooltip="" group="group_color" normalimage="file='color12.png' corner='2,2,2,2'" />
+				<Option name="color_13" float="true" pos="104,21" width="14" height="14" tooltip="" group="group_color" normalimage="file='color13.png' corner='2,2,2,2'" />
+				<Option name="color_14" float="true" pos="120,21" width="14" height="14" tooltip="" group="group_color" normalimage="file='color14.png' corner='2,2,2,2'" />
+				<Option name="color_15" float="true" pos="136,21" width="14" height="14" tooltip="" group="group_color" normalimage="file='color15.png' corner='2,2,2,2'" />
+				<Option name="color_16" float="true" pos="152,21" width="14" height="14" tooltip="" group="group_color" normalimage="file='color16.png' corner='2,2,2,2'" />
+			</HorizontalLayout>
+			<HorizontalLayout name="mosaic_layout" width="170" height="40">
+				<Label name="mosaic_txt" text="模糊度" float="true" pos="5,10" width="45" height="20" textcolor="#ff000000"/>
+				<Slider name="mosaic_slider" bordersize="0" float="true" pos="55,13" height="13" width="110" thumbsize="13,13" min="0" max="100" value="0" bkimage="file=&apos;slider_bg.png&apos; corner=&apos;9,0,9,0&apos;" foreimage="file=&apos;slider_fg.png&apos; corner=&apos;9,0,9,0&apos;" thumbimage="slider_thumb.png" thumbhotimage="slider_thumb_hover.png" />
+			</HorizontalLayout>
+		</HorizontalLayout>
+	</Container>
+</Window>
