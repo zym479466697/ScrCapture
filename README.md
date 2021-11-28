@@ -1,6 +1,7 @@
 # ScrCapture
 duilib screenshot(duilib 仿qq实现截图功能)。因为需求停止把项目分享下，用vs2015编译功能基本齐全了，细节自己调整完善
 ### 功能介绍：
+* 放大镜
 * 矩形
 * 椭圆
 * 直线
